@@ -1,0 +1,36 @@
+import pandas as pd
+import numpy as np
+from sentence_transformers import SentenceTransformer
+import joblib
+
+modelo_sbert = SentenceTransformer("all-mpnet-base-v2")
+
+def codificar_features(candidato):
+    area = str(candidato.get("informacoes_profissionais.area_atuacao", "")).lower()
+    nivel = str(candidato.get("informacoes_profissionais.nivel_profissional", "")).lower()
+    ingles = str(candidato.get("formacao_e_idiomas.nivel_ingles", "")).lower()
+    escolaridade = str(candidato.get("formacao_e_idiomas.nivel_escolaridade", "")).lower()
+    experiencia = candidato.get("informacoes_profissionais.tempo_experiencia", 0)
+    return [
+        hash(area) % 1000 / 1000,
+        hash(nivel) % 1000 / 1000,
+        hash(ingles) % 1000 / 1000,
+        hash(escolaridade) % 1000 / 1000,
+        min(experiencia, 50) / 50,
+    ]
+
+#Carregando dados
+df_vagas = pd.read_json("vagas.json").T.reset_index(names="id_vaga")
+df_vagas = pd.json_normalize(df_vagas.to_dict(orient="records"))
+
+df_applicants = pd.read_json("applicants.json").T.reset_index(names="id_candidato")
+df_applicants = pd.json_normalize(df_applicants.to_dict(orient="records"))
+df_applicants["cv_pt"] = df_applicants["cv_pt"].fillna("").str.slice(0, 1500)
+
+#Calculando embeddings dos candidatos
+df_applicants["embedding_cv"] = df_applicants["cv_pt"].apply(lambda x: modelo_sbert.encode(x))
+df_applicants["features"] = df_applicants.apply(lambda c: codificar_features(c), axis=1)
+
+#Salvando arquivos processados
+df_vagas.to_parquet("vagas_preprocessed.parquet", index=False)
+df_applicants.to_parquet("applicants_preprocessed.parquet", index=False)
