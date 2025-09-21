@@ -229,8 +229,8 @@ Veja também o vídeo apresentando o projeto: [Vídeo](link)
 
 0. Pré-requisitos
 
-- Instalação do Python
-- Instalação do Docker
+- Instalação do Python 3.10+
+- Instalação do Docker e Docker Compose
 
 1. Clone o Repositório
 ```bash
@@ -239,11 +239,11 @@ git clone [https://github.com/mayarareghin/datathon-selecao-candidatos-rh.git]
 
 2. Baixe as bases de dados e o modelo salvo em joblib através do link abaixo (arquivos grandes) e salve em "datathon/ml_models/"
 
-- https://drive.google.com/drive/folders/1oVsvJFR1POPneoScvX1JwxYco7lfPHDE
+🔗 [Google Drive](https://drive.google.com/drive/folders/1oVsvJFR1POPneoScvX1JwxYco7lfPHDE)
 
 4. Crie o arquivo .env na raiz do projeto com o conteúdo abaixo:
 ```bash
-DATABASE_URL="sqlite+aiosqlite:///./app.db"
+DATABASE_URL="postgresql+asyncpg://datathon:datathonpas@db:5432/app_db"
 ALGORITHM="HS256"
 SECRET_KEY="senha123"
 ACCESS_TOKEN_EXPIRE_MINUTES=30
@@ -254,7 +254,7 @@ ACCESS_TOKEN_EXPIRE_MINUTES=30
 docker build -t datathon-minha_api .
 ```
 
-5 Rode o container
+5 Suba o container
 ```bash
 docker run -d --name datathon-container -p 8000:8000 --env-file .env datathon-minha_api
 ```
