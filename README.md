@@ -194,7 +194,11 @@ Arquivos como test_app.py, test_auth.py, test_db.py, test_predict.py e test_user
 - 🧠 BERT e Scikit-learn – Treinamento do modelo LSTM
 - 📊 Pandas e Numpy – Manipulação e pré-processamento de dados
 - 🚀 FastAPI – Criação da API REST
+- 🗄️ PostgreSQL
+- 🔐 JWT (PyJWT)
 - 🐳 Docker – Containerização da aplicação
+- 🧪 Pytest
+- 🔄 Alembic
 - ☁️ AWS EC2 e AWS Cloudwatch - Deploy e monitoramento da aplicação em nuvem
 
 ## 📊 Sobre o modelo
