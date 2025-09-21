@@ -130,3 +130,5 @@ joblib
 sentence_transformers
 pyarrow
 fastparquet
+asyncpg
+alembic

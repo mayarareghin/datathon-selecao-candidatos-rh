@@ -1,8 +1,7 @@
-import asyncio
 import sys
 from logging.config import fileConfig
 from dotenv import load_dotenv
-import os
+import asyncio, os
 
 from sqlalchemy.ext.asyncio import async_engine_from_config
 from sqlalchemy import pool
@@ -16,7 +15,7 @@ load_dotenv()
 
 DATABASE_URL = os.getenv("DATABASE_URL")
 
-if sys.platform == 'win32':
+if os.name == "nt":  # windows
     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
 

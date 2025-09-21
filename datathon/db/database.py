@@ -1,10 +1,17 @@
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import sessionmaker
 
 from datathon.core.settings import Settings
 
-engine = create_async_engine(Settings().DATABASE_URL)
+DATABASE_URL = Settings().DATABASE_URL  # vem do .env
 
+# cria engine async
+engine = create_async_engine(DATABASE_URL, echo=False, future=True)
 
-async def get_session():
-    async with AsyncSession(engine, expire_on_commit=False) as session:
+# session factory para async
+AsyncSessionLocal = sessionmaker(engine, class_=AsyncSession, expire_on_commit=False)
+
+# dependency para FastAPI
+async def get_session() -> AsyncSession:
+    async with AsyncSessionLocal() as session:
         yield session
