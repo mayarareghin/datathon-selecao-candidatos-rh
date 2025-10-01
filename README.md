@@ -225,9 +225,9 @@ O código do treinamento do modelo está disponível também no Google Colab: [C
 
 ## 📍 Documentação do projeto
 
-Confira todos os detalhes e explicações do projeto na documentação: [Documentação em PDF](link)
+Confira todos os detalhes e explicações do projeto na documentação: [Documentação em PDF](https://docs.google.com/document/d/1Xnvfpqzc1jjzvCUS_eo-FwUtkX8j2hhm/edit)
 
-Veja também o vídeo apresentando o projeto: [Vídeo](link)
+Veja também o vídeo apresentando o projeto: [Vídeo](https://drive.google.com/drive/folders/17-tNsgZb_wwQK5l9h2SQhG8p3C7SlPnD)
 
 ## 🧪 Como Executar o Projeto
 
